@@ -1,4 +1,4 @@
-# 🤖 NURU Bot
+# 🤖 Nuru Bot
 
 Welcome to the **Nuru Bot**, your friendly virtual assistant powered by AI technology. This bot is designed to provide instant support, answer questions, and engage users in meaningful conversations all within the convenience of Telegram.
 
