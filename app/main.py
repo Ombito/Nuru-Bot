@@ -5,6 +5,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes, MessageHandler, filters, CallbackContext
 bot = telegram.Bot(token='YOUR_BOT_TOKEN')
 from dotenv import load_dotenv
+import openai
 
 load_dotenv()
 BOT_TOKEN = os.getenv('TOKEN')
@@ -21,7 +22,7 @@ app = ApplicationBuilder().token(BOT_TOKEN).build()
 
 
 async def start_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text('Hello! I am your friendly bot. Type /help to see what I can do.')
+    await update.message.reply_text('Hi there. I am your friendly bot. Type /help to see what I can do.')
 
 
 async def send_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -47,7 +48,7 @@ async def echo_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def catch_all(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text("Sorry, I do not understand what you wrote. Type /help for a list of commands.")
+    await update.message.reply_text("Sorry I do not understand what you wrote. Type /help for a list of commands.")
 
 
 async def error_handler(update: Update, context: CallbackContext):
@@ -59,7 +60,7 @@ app.add_handler(CommandHandler("start", start_message))
 app.add_handler(CommandHandler("help", send_help))
 app.add_handler(CommandHandler("echo", echo_message))
 app.add_handler(CommandHandler("text", echo_all))
-app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, catch_all))
+app.add_handler(MessageHandler(filters.COMMAND, catch_all))
 app.add_error_handler(error_handler)
 
 
