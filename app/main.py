@@ -9,7 +9,8 @@ import openai
 
 load_dotenv()
 BOT_TOKEN = os.getenv('TOKEN')
-BOT_USERNAME = os.getenv('TOKEN')
+BOT_USERNAME = os.getenv('USERNAME')
+OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
 
 
 logging.basicConfig(
@@ -17,6 +18,8 @@ logging.basicConfig(
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
+
+openai.api_key = OPENAI_API_KEY
 
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 
@@ -33,6 +36,27 @@ async def send_help(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "/echo <text> - I will repeat what you say!"
     )
     await update.message.reply_text(help_text)
+
+async def get_ai_response(user_message):
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[{"role": "user", "content": user_message}]
+        )
+        return response['choices'][0]['message']['content']
+    except Exception as e:
+            logger.error(f"Error getting AI response: {e}")
+            return "I'm sorry, but I couldn't process your request at this time."
+
+
+async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    user_message = update.message.text
+    logger.info(f"User message: {user_message}")
+    
+    ai_response = await get_ai_response(user_message)
+    
+    await update.message.reply_text(ai_response)
+
 
 
 async def echo_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -60,10 +84,10 @@ app.add_handler(CommandHandler("start", start_message))
 app.add_handler(CommandHandler("help", send_help))
 app.add_handler(CommandHandler("echo", echo_message))
 app.add_handler(CommandHandler("text", echo_all))
-app.add_handler(MessageHandler(filters.COMMAND, catch_all))
+app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 app.add_error_handler(error_handler)
 
 
 if __name__ == "__main__":
     print('Bot starting...')
-    app.run_polling(poll_interval=3)
+    app.run_polling()
