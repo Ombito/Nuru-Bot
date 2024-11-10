@@ -5,7 +5,7 @@ Welcome to the **Nuru Bot**, your friendly virtual assistant powered by AI techn
 ## 🌟 Features
 
 - **Intelligent Conversations**: Harnesses the power of OpenAI's GPT model to deliver human-like responses.
-- **User-Friendly Commands**: Simple commands to guide users through interactions.
+- **User friendly Commands**: Simple commands to guide users through interactions.
 - **Real-Time Engagement**: Responds instantly to user inquiries, making it perfect for support scenarios.
 
 ## 🚀 Getting Started
@@ -14,7 +14,7 @@ Follow these steps to set up your bot.
 
 ### Prerequisites
 
-Before diving in, make sure you have:
+Before diving in make sure you have:
 
 - Python 3.10 or higher installed on your machine.
 - A Telegram account to create and interact with your bot.
@@ -73,7 +73,7 @@ The project is organized as follows:
 
 
 ## 🤝 Contributing
-We welcome contributions from everyone! If you have ideas for new features or improvements, here’s how you can help:
+We welcome contributions from everyone. If you have ideas for new features or improvements here is how you can help:
 1. Fork the repository.
 2. Create a feature branch (git checkout -b feature/AmazingFeature).
 3. Commit your changes (git commit -m 'Add some AmazingFeature').
