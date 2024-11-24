@@ -4,7 +4,7 @@ Welcome to the **Nuru Bot**, your friendly virtual assistant powered by AI techn
 
 ## 🌟 Features
 
-- **Intelligent Conversations**: Harnesses the power of OpenAI's GPT model to deliver human-like responses.
+- **Intelligent Conversations**: Harnesses the power of OpenAI's GPT model to deliver human like responses.
 - **User friendly Commands**: Simple commands to guide users through interactions.
 - **Real-Time Engagement**: Responds instantly to user inquiries, making it perfect for support scenarios.
 
